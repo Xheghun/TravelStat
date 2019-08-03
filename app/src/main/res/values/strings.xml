@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Travel Stat</string>
+    <string name="default_client_id">986833571070-a510eeokbebnrqc64d3kldp22k000n72.apps.googleusercontent.com</string>
+    <string name="sign_in">Sign In</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="or">OR</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="add_new_travel_details">Add new travel details</string>
+    <string name="refresh_list">refresh list</string>
+    <string name="place">Place</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
+    <string name="discard">discard</string>
+    <string name="save">save</string>
+</resources>

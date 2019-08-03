@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "986833571070",
+    "firebase_url": "https://travelstat-29033.firebaseio.com",
+    "project_id": "travelstat-29033",
+    "storage_bucket": "travelstat-29033.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986833571070:android:5423ee80b6d10ecf",
+        "android_client_info": {
+          "package_name": "com.xheghun.travelstat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986833571070-rsi5ltmu1ju42pvhkmtvnlog66lb3i3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xheghun.travelstat",
+            "certificate_hash": "9a4af9ed03a9d2e7d813cf34f686a8d4cac3acd7"
+          }
+        },
+        {
+          "client_id": "986833571070-a510eeokbebnrqc64d3kldp22k000n72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWaX9zt-JH-P53gjsM8fVecf6TnUEnF_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986833571070-a510eeokbebnrqc64d3kldp22k000n72.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
