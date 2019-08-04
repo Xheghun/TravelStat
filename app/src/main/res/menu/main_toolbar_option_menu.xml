@@ -9,4 +9,7 @@
         android:title="@string/refresh_list"
         android:icon="@drawable/ic_sync"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/logout"
+        android:title="log out" />
 </menu>

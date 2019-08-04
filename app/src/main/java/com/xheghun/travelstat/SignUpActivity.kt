@@ -49,6 +49,7 @@ class SignUpActivity : FirebaseAppCompactActivity() {
                             when {
                                 task.isSuccessful -> {
                                     Toast.makeText(this, "sign up success", Toast.LENGTH_SHORT).show()
+                                    startActivity(Intent(this, MainActivity::class.java))
                                 }
                                 else -> {
                                     Toast.makeText(this, "sign up failed ${task.result} ", Toast.LENGTH_SHORT).show()

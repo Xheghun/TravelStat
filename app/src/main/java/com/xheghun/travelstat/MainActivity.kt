@@ -1,10 +1,8 @@
 package com.xheghun.travelstat
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FirebaseAppCompactActivity() {
@@ -18,6 +16,10 @@ class MainActivity : FirebaseAppCompactActivity() {
         toolbar.setOnMenuItemClickListener {item: MenuItem? ->
             when(item!!.itemId) {
                 R.id.new_travel -> { startActivity(Intent(this,NewTravelActivity::class.java))}
+                R.id.logout -> {
+                    auth.signOut()
+                    startActivity(Intent(this, SignInActivity::class.java))
+                }
             }
             true
         }

@@ -30,6 +30,13 @@ class SignInActivity : FirebaseAppCompactActivity() {
         if (auth.currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
         }
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
 
         root = findViewById(R.id.root_view)
         sign_with_google_btn.setOnClickListener { googleSignIn()}
@@ -40,12 +47,7 @@ class SignInActivity : FirebaseAppCompactActivity() {
     //sign in with google
     private fun googleSignIn() {
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build()
 
-        token_id.text = gso.serverClientId
-        googleSignInClient = GoogleSignIn.getClient(this,gso)
 
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -53,8 +55,8 @@ class SignInActivity : FirebaseAppCompactActivity() {
 
     //create new user with email and password
     private fun emailSignIn() {
-        val email: String  = email_layout_edit.text.toString()
-        val password: String = password_layout_edit.text.toString()
+        val email: String = email_layout_edit.text.toString().trim()
+        val password: String = password_layout_edit.text.toString().trim()
         val error = "this field is required"
         when {
             email.isEmpty() -> {
@@ -74,7 +76,7 @@ class SignInActivity : FirebaseAppCompactActivity() {
                                 updateUI(user)
                                 startActivity(Intent(this,MainActivity::class.java))
                             } else -> {
-                                Snackbar.make(root_view,"unable to sign in",Snackbar.LENGTH_SHORT)
+                            Snackbar.make(root_view, "unable to sign in ${task.result}", Snackbar.LENGTH_SHORT)
                                         .show()
                             updateUI(null)
                         }
@@ -114,9 +116,7 @@ class SignInActivity : FirebaseAppCompactActivity() {
                     if (task.isSuccessful) {
                         //sign-in success
                         Log.d(TAG,"signINWithCredential:success")
-                        val user = auth.currentUser
-                        updateUI(user)
-
+                        startActivity(Intent(this, MainActivity::class.java))
                     } else {
                         //If sign in fails, display message to the user.
                         Log.w(TAG, "signInWithCredentials:failure", task.exception)
