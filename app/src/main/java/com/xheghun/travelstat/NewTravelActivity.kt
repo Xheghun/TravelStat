@@ -43,7 +43,6 @@ class NewTravelActivity : FirebaseAppCompactActivity() {
         toolbar.setOnMenuItemClickListener { item: MenuItem? ->
             when (item!!.itemId) {
                 R.id.save -> {
-                    progress_horizontal.visibility = View.VISIBLE
                     uploadTravelDetails()
                 }
                 R.id.discard -> {
@@ -94,6 +93,7 @@ class NewTravelActivity : FirebaseAppCompactActivity() {
                 travel_description_layout.isErrorEnabled = false; travel_price_layout.isErrorEnabled = true; travel_place_layout.isErrorEnabled = false
                 travel_description_layout.error = ""; travel_price_layout.error = ""; travel_place_layout.error = ""
 
+                progress_horizontal.visibility = View.VISIBLE
                 //uploadImage
                 var storageRef = storage.reference
 

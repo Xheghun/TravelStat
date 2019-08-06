@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.travel_list_item.view.*
 class MainActivity : FirebaseAppCompactActivity() {
 
     private lateinit var reference: DatabaseReference
-    private lateinit var list: List<TravelInfo2>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +42,6 @@ class MainActivity : FirebaseAppCompactActivity() {
         }
 
         new_travel_fab.setOnClickListener { startActivity(Intent(this, NewTravelActivity::class.java)) }
-
-        list = ArrayList()
-
         travel_list.layoutManager = LinearLayoutManager(this)
         travel_list.setHasFixedSize(true)
         logRecyclerView()
@@ -68,6 +64,7 @@ class MainActivity : FirebaseAppCompactActivity() {
                 reference
         ) {
             override fun populateViewHolder(holder: TravelViewHolder?, model: TravelInfo2?, position: Int) {
+                pending_messing.visibility = View.GONE
                 holder!!.itemView.rc_travel_place.text = model?.place
                 holder.itemView.rc_travel_price.text = model?.price
                 holder.itemView.rc_travel_description.text = model?.description
