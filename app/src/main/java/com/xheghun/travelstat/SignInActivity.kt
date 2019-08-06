@@ -64,24 +64,28 @@ class SignInActivity : FirebaseAppCompactActivity() {
                 password_layout.isErrorEnabled = true
                 password_layout.error = error
             }
-            else -> auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this) {task ->
-                        when {
-                            task.isSuccessful -> {
-                                //Sign in success, goto next activity
-                                val user = auth.currentUser
-                                updateUI(user)
-                                progress_horizontal.visibility = View.INVISIBLE
-                                startActivity(Intent(this,MainActivity::class.java))
-                                finish()
-                            } else -> {
-                            progress_horizontal.visibility = View.INVISIBLE
-                            Snackbar.make(root_view, "unable to sign in ${task.result}", Snackbar.LENGTH_SHORT)
-                                        .show()
-                            updateUI(null)
+            else -> {
+                progress_horizontal.visibility = View.VISIBLE
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this) { task ->
+                            when {
+                                task.isSuccessful -> {
+                                    //Sign in success, goto next activity
+                                    val user = auth.currentUser
+                                    updateUI(user)
+                                    progress_horizontal.visibility = View.INVISIBLE
+                                    startActivity(Intent(this, MainActivity::class.java))
+                                    finish()
+                                }
+                                else -> {
+                                    progress_horizontal.visibility = View.INVISIBLE
+                                    Snackbar.make(root_view, "unable to sign in", Snackbar.LENGTH_SHORT)
+                                            .show()
+                                    updateUI(null)
+                                }
+                            }
                         }
-                        }
-                    }
+            }
         }
     }
 

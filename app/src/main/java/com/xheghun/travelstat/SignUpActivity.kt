@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : FirebaseAppCompactActivity() {
@@ -16,7 +17,7 @@ class SignUpActivity : FirebaseAppCompactActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-        sign_up_btn.setOnClickListener { progress_horizontal.visibility = View.VISIBLE;signUp() }
+        sign_up_btn.setOnClickListener { signUp() }
     }
 
 
@@ -44,6 +45,7 @@ class SignUpActivity : FirebaseAppCompactActivity() {
                 password_layout.error = ""; email_layout.error = ""; username_layout.error = ""
                 password_layout.isErrorEnabled = false; email_layout.isErrorEnabled = false; username_layout.isErrorEnabled = false
 
+                progress_horizontal.visibility = View.VISIBLE
                 auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this) { task ->
                             when {
@@ -55,7 +57,7 @@ class SignUpActivity : FirebaseAppCompactActivity() {
                                 }
                                 else -> {
                                     progress_horizontal.visibility = View.INVISIBLE
-                                    Toast.makeText(this, "sign up failed ${task.result} ", Toast.LENGTH_SHORT).show()
+                                    Snackbar.make(findViewById(R.id.root_view), "sign up failed", Snackbar.LENGTH_SHORT).show()
                                 }
                             }
                         }
