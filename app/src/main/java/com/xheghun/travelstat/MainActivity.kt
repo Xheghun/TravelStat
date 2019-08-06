@@ -1,5 +1,7 @@
 package com.xheghun.travelstat
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -33,6 +35,9 @@ class MainActivity : FirebaseAppCompactActivity() {
                     auth.signOut()
                     startActivity(Intent(this, SignInActivity::class.java))
                 }
+                R.id.list_refresh -> {
+                    logRecyclerView()
+                }
             }
             true
         }
@@ -46,6 +51,14 @@ class MainActivity : FirebaseAppCompactActivity() {
         logRecyclerView()
     }
 
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+                .setTitle("Travel Stat")
+                .setMessage("Application will Exit")
+                .setPositiveButton("yes") { dialogInterface: DialogInterface, i: Int -> super.onBackPressed() }
+                .show()
+
+    }
 
     private fun logRecyclerView() {
         val firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<TravelInfo2, TravelViewHolder>(

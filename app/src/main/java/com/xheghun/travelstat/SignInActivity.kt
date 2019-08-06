@@ -16,12 +16,12 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
+
 class SignInActivity : FirebaseAppCompactActivity() {
 
     private val RC_SIGN_IN = 7
     private lateinit var googleSignInClient: GoogleSignInClient
     lateinit var root: ViewGroup
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,16 +39,13 @@ class SignInActivity : FirebaseAppCompactActivity() {
 
 
         root = findViewById(R.id.root_view)
-        sign_with_google_btn.setOnClickListener { googleSignIn()}
+        sign_with_google_btn.setOnClickListener { progress_horizontal.visibility = View.VISIBLE;googleSignIn() }
         sign_up_btn.setOnClickListener { emailSignIn() }
 
     }
 
     //sign in with google
     private fun googleSignIn() {
-
-
-
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
@@ -74,8 +71,11 @@ class SignInActivity : FirebaseAppCompactActivity() {
                                 //Sign in success, goto next activity
                                 val user = auth.currentUser
                                 updateUI(user)
+                                progress_horizontal.visibility = View.INVISIBLE
                                 startActivity(Intent(this,MainActivity::class.java))
+                                finish()
                             } else -> {
+                            progress_horizontal.visibility = View.INVISIBLE
                             Snackbar.make(root_view, "unable to sign in ${task.result}", Snackbar.LENGTH_SHORT)
                                         .show()
                             updateUI(null)
@@ -116,10 +116,13 @@ class SignInActivity : FirebaseAppCompactActivity() {
                     if (task.isSuccessful) {
                         //sign-in success
                         Log.d(TAG,"signINWithCredential:success")
+                        progress_horizontal.visibility = View.INVISIBLE
                         startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     } else {
                         //If sign in fails, display message to the user.
                         Log.w(TAG, "signInWithCredentials:failure", task.exception)
+                        progress_horizontal.visibility = View.INVISIBLE
                         Toast.makeText(this,"Authentication Failed.",Toast.LENGTH_SHORT).show()
                     }
                 }

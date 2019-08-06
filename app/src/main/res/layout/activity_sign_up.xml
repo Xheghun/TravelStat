@@ -8,17 +8,25 @@
     tools:context=".SignUpActivity"
     android:id="@+id/root_view">
 
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/colorHeadingText"
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/sign_up"
         android:textSize="26sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_horizontal"
         tools:layout_editor_absoluteX="12dp" />
-
-
 
     <LinearLayout
         android:orientation="horizontal"
@@ -84,6 +92,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_up_btn"
+        app:backgroundTint="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -95,6 +104,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_in_btn"
+        android:textColor="@color/colorPrimary"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:text="Sign In"
         android:layout_width="wrap_content"

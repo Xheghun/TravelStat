@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
@@ -42,6 +43,7 @@ class NewTravelActivity : FirebaseAppCompactActivity() {
         toolbar.setOnMenuItemClickListener { item: MenuItem? ->
             when (item!!.itemId) {
                 R.id.save -> {
+                    progress_horizontal.visibility = View.VISIBLE
                     uploadTravelDetails()
                 }
                 R.id.discard -> {
@@ -104,23 +106,26 @@ class NewTravelActivity : FirebaseAppCompactActivity() {
                 val baos = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 val data = baos.toByteArray()
-
                 val uploadTask = imagesRef.putBytes(data)
 
                 uploadTask.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         imagesRef.downloadUrl.addOnCompleteListener { urlTask ->
                             urlTask.result?.let { imageUri = it }
-                            val info = TravelInfo(place = place, price = price, description = description, imgLink = imageUri.toString())
+                            val info = TravelInfo(place = place, price = "$$price", description = description, imgLink = imageUri.toString())
                             database.child("travelInfo").child("$place ${auth.currentUser!!.uid}").setValue(info)
-                                    .addOnSuccessListener { Toast.makeText(this, "info successfully uploaded", Toast.LENGTH_SHORT).show();onBackPressed() }
+                                    .addOnSuccessListener {
+                                        progress_horizontal.visibility = View.INVISIBLE
+                                        Toast.makeText(this, "info successfully uploaded", Toast.LENGTH_SHORT).show();onBackPressed()
+                                    }
                                     .addOnFailureListener {
+                                        progress_horizontal.visibility = View.INVISIBLE
                                         Snackbar.make(root_view, "unable to upload info", Snackbar.LENGTH_INDEFINITE)
                                                 .setAction("Try Again") { uploadTravelDetails() }
                                     }
                         }
                     } else {
-
+                        progress_horizontal.visibility = View.INVISIBLE
                         Snackbar.make(root_view, "image upload failed", Snackbar.LENGTH_SHORT)
                     }
 

@@ -8,14 +8,25 @@
     tools:context=".SignInActivity"
     android:id="@+id/root_view">
 
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/textView"
+        android:layout_marginBottom="6dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/lato_bold"
         android:text="@string/sign_in"
+        android:textColor="@color/colorHeadingText"
         android:textSize="26sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_horizontal"
         tools:layout_editor_absoluteX="12dp" />
 
     <LinearLayout
@@ -29,7 +40,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/email_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +56,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,6 +74,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_up_btn"
+        app:backgroundTint="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -76,11 +86,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_in_btn"
+        android:textColor="@color/colorPrimary"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:text="Sign Up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="signUpActivity"

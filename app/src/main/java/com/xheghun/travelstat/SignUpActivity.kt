@@ -16,7 +16,7 @@ class SignUpActivity : FirebaseAppCompactActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-        sign_up_btn.setOnClickListener { signUp() }
+        sign_up_btn.setOnClickListener { progress_horizontal.visibility = View.VISIBLE;signUp() }
     }
 
 
@@ -49,9 +49,12 @@ class SignUpActivity : FirebaseAppCompactActivity() {
                             when {
                                 task.isSuccessful -> {
                                     Toast.makeText(this, "sign up success", Toast.LENGTH_SHORT).show()
+                                    progress_horizontal.visibility = View.INVISIBLE
                                     startActivity(Intent(this, MainActivity::class.java))
+                                    finish()
                                 }
                                 else -> {
+                                    progress_horizontal.visibility = View.INVISIBLE
                                     Toast.makeText(this, "sign up failed ${task.result} ", Toast.LENGTH_SHORT).show()
                                 }
                             }
